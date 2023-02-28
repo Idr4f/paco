@@ -62,7 +62,7 @@ class inicioController extends Controller
         ->whereBetween('created_at', ['2020-12-01 00:00:00', '2020-12-31 23:59:59'])
         ->count();
 
-        return view('inicio')->with(array(
+        return view('inicio')->with([
             'users_ene' => $users_ene,
             'users_feb' => $users_feb,
             'users_mar' => $users_mar,
@@ -74,7 +74,7 @@ class inicioController extends Controller
             'users_sep' => $users_sep,
             'users_oct' => $users_oct,
             'users_nov' => $users_nov,
-            'users_dic' => $users_dic,
-        ));
+            'users_dic' => $users_dic
+        ]);
     }
 }

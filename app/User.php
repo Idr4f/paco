@@ -14,13 +14,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class User extends Eloquent implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
-    use notificable;
 
     protected $collection = 'users';
-    protected $primaryKey = 'id';
+    protected $primaryKey = '_id';
 
     protected $filliable = [
-        '_id', 'email', 'nombre', 'password', 'estado', 'creado_e', 'acrualizado_e'
+        '_id', 'email', 'nombre', 'password', 'estado', 'creado_e', 'actualizado_e'
     ];
 
     protected $hidden = [

@@ -38,7 +38,9 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn'=>'mongodb+srv://admin:admin@clustercursojava.dasxz.mongodb.net/unidapp'
+            //'dsn'=>'mongodb+srv://dkmetalcol:ifjc3x22@cluster0-aofbm.mongodb.net/test?retryWrites=true&w=majority',
+            'dsn' => env('DB_DSN'),
+            'database' => 'unidapp',
         ],
 
     ],
