@@ -56,7 +56,7 @@ class UsuariosController extends Controller
         $i = 0;
         return view('usuario.ConsultarUsuarios')->with(array(
             'usuarios' => $usuarios,
-            '_id' => $i
+            'i' => $i
         ));
     }
 
@@ -120,7 +120,8 @@ class UsuariosController extends Controller
 
           ];
 
-          $this->validate($request, $rules, $messages);
+        $this->validate($request, $rules, $messages);
+
         $date = date('Y-m-d H:i:s');
         $usuario = User::findOrFail($id_usuario);
         $usuario->fill(\Request::all());
@@ -220,6 +221,31 @@ class UsuariosController extends Controller
         $usuario->update();
 
         return redirect('/datos-usuario?email='.$usuario->email.'')->with(array('message' => 'El estado del usuario ha sido editado correctamente.'));
+    }
+
+    public function ModContrasena (Request $request, $id_usuario)
+    {
+        $rules = array(
+            'contrasena' => ['required', 'min:6'],
+            'contrasena_confirmar' => ['required', 'same:contrasena']
+          );
+    
+          $messages = [
+            'contrasena.required' => 'El campo de nueva contraseña es requerido',
+            'contrasena_confirmar.same' => 'Las contraseñas no coinciden'
+            
+          ];
+    
+        $this->validate($request, $rules, $messages);
+        $date = date('Y-m-d H:i:s');
+        $usuario = User::findOrFail($id_usuario);
+        $usuario->fill(\Request::all()); 
+        $usuario->password = bcrypt($request->contrasena);
+        $usuario->attemps = 0;
+        $usuario->updated_at = $date;
+        $usuario->update();
+
+        return redirect('/datos-usuario?email='.$usuario->email.'')->with(array('message' => 'Se ha cambiado la contraseña del usuario correctamente.')); 
     }
 
     public function ConsultarEstablecimientoUsuario (Request $request)

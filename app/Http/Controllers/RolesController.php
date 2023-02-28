@@ -162,7 +162,8 @@ class RolesController extends Controller
 
           ];
 
-          $this->validate($request, $rules, $messages);
+        $this->validate($request, $rules, $messages);
+        
         $date = date('Y-m-d H:i:s');
         $rol = Rol::findOrFail($id_rol);
         $rol->fill(\Request::all());

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Notifications\notificable;
+use Illuminate\Notifications\Notifiable;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -14,11 +14,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class User extends Eloquent implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
+    use Notifiable;
 
     protected $collection = 'users';
     protected $primaryKey = '_id';
 
-    protected $filliable = [
+    protected $fillable = [
         '_id', 'email', 'nombre', 'password', 'estado', 'creado_e', 'actualizado_e'
     ];
 
